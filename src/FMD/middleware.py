@@ -7,11 +7,12 @@ class AdminLoginRequiredMiddleware:
 
     def __call__(self, request):
 
-        if request.path.startswith("login"):
-            pass
-        elif (not request.user.is_authenticated) or (
-                request.path.startswith('/admin') and not request.user.has_perm('admin.access_admin')):
-            print("redirection from path ", request.path)
+        if not request.user.is_authenticated:
+            if request.path.startswith("/login") or request.path.startswith("/signup"):
+                pass
+            else:
+                return redirect("/login")
+        elif request.path.startswith('/admin') and not request.user.has_perm('admin.access_admin'):
             return redirect("/")
 
         return self.get_response(request)

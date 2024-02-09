@@ -9,7 +9,9 @@
     {% if messages %}
     <div class="message">
         {% for message in messages %}
-        <p style="color: {{ color }}; margin-top: 10px;">{{ message }}</p>
+        {% with color|default:"green" as message_color %}
+        <p style="color: {{ message_color }}; margin-top: 10px;">{{ message }}</p>
+        {% endwith %}
         {% endfor %}
     </div>
     {% endif %}

@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.core',
 ]
 
 MIDDLEWARE = [
@@ -76,8 +82,12 @@ WSGI_APPLICATION = 'FMD.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
     }
 }
 

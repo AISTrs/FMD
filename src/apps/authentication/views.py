@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
@@ -36,15 +36,15 @@ def signup(request):
 
         if User.objects.filter(username=username):
             messages.error(request, "Username already exists! Please try another username")
-            return render(request, "signup.html")
+            return redirect("/signup/")
 
         if password1 != password2:
             messages.error(request, "Passwords did not match!")
-            return render(request, "signup.html")
+            return redirect("/signup/")
 
         if User.objects.filter(email=email) and email != "":
             messages.error(request, "Email already registered!")
-            return render(request, "login.html", {"color": "green"})
+            return redirect("/signup/")
 
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.first_name = firstname
@@ -52,6 +52,12 @@ def signup(request):
         user.save()
 
         messages.success(request, "Account created successfully! Please login using your credentials")
-        return render(request, "login.html", {"color": "green"})
+        return redirect("/login/")
 
     return render(request, "signup.html")
+
+
+def logout(request):
+    auth_logout(request)
+    messages.success(request, "Logged out successfully!")
+    return redirect("/login/")
