@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title> {% block title %} {% endblock %}</title>
+
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script crossorigin="anonymous"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="/static/assets/css/base_home.css" rel="stylesheet">
+    <script src="/static/assets/js/home.js"></script>
+
+</head>
+
+<body>
+{% load filters %}
+
+<div class="base-nav-layout">
+    <nav class="nav-layout" id="base-nav-layout">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link ps-4 py-0 " href="/">
+                    <i class="bi bi-house fs-2 text-white"></i>
+                    <span class="nav-text text-white">Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ps-4 py-0" href="/profile/">
+                    <i class="bi bi-person fs-1 text-white"></i>
+                    <span class="nav-text text-white">Profile</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a aria-controls="collapseCommittee" aria-expanded="false" class="nav-link accordion-button ps-4 py-0"
+                   data-bs-toggle="collapse" href="#collapseCommittee" id="nav-committee-accordion" role="button">
+                    <i class="bi bi-people fs-1 text-white"></i>
+                    <span class="nav-text text-white">Committee</span>
+                    <i class="bi bi-chevron-down text-white m-lg-3 nav-text" id="collapse-arrow-icon"></i>
+                </a>
+                <div class="collapse rounded-1 bg-white" id="collapseCommittee">
+                    <ul>
+                        <li class="nav-item">
+                            <a href="/">
+                                <i class=" bi-cash ps-5 p2"></i>
+                                <span>Treasury</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+            {% if user.is_superuser or user|in_group:'admin_group' %}
+            <li class="nav-item">
+                <a class="nav-link ps-4 py-0" href="/admin/">
+                    <i class="bi bi-person-lock fs-1 text-white"></i>
+                    <span class="nav-text text-white">Manage</span>
+                </a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link ps-4 py-0" href="/logout/">
+                    <i class="bi bi-box-arrow-right fs-1 text-white"></i>
+                    <span class="nav-text text-white">Logout</span>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+</div>
+
+
+</body>
+
+</html>
