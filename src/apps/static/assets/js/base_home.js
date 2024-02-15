@@ -25,16 +25,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get all elements with the class 'nav-text'
     var navTextElements = document.querySelectorAll('.nav-text');
 
+    var contentDiv = document.getElementById('div-container-fluid-content')
+
     // Loop through each element and change its opacity
     navTextElements.forEach(function (element) {
         element.style.opacity = '0'; // Set opacity to 0
     });
 
-    nav.addEventListener('mouseover', function () {
+    nav.addEventListener('mouseenter', function () {
         // Loop through each element and change its opacity
+        
         navTextElements.forEach(function (element) {
             element.style.opacity = '1'; // Set opacity to 1
         });
+
+        contentDiv.style.left='200px';
     });
 
     nav.addEventListener('mouseleave', function () {
@@ -48,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
         navTextElements.forEach(function (element) {
             element.style.opacity = '0'; // Set opacity to 0
         });
+
+        contentDiv.style.left='90px';
 
         var arrowIcon = document.getElementById('collapse-arrow-icon');
 

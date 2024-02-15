@@ -9,7 +9,18 @@
     transition: 0.5s;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    
+}
+
+.container-fluid {
+    background-color: whitesmoke;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 90px; 
+    right: 0; 
+    padding-left: 15px;
+    overflow: auto;
+    transition: 0.5s;
 }
 
 .base-nav-layout:hover{
@@ -31,10 +42,10 @@
 
 .nav-text {
     margin-left: 20px;
+    opacity: 0;
 }
 
 .nav-link:hover {
     background-color: #6ca6ff; 
     border-radius: 10px;
 }   
-

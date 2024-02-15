@@ -8,6 +8,8 @@ django = "==5.0.2"
 psycopg2-binary = "==2.9.9"
 python-dotenv = "==1.0.1"
 djangorestframework = "==3.14.0"
+django-db-views = "0.1.6"
+
 
 [dev-packages]
 

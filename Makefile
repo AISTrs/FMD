@@ -3,13 +3,14 @@ run:
 
 migrate:
 	pipenv run python src/manage.py makemigrations
+	pipenv run python src/manage.py makeviewmigrations
 	pipenv run python src/manage.py migrate
 
 check:
 	pipenv run python src/manage.py check
 
 superuser:
-	python src/manage.py createsuperuser
+	pipenv run python src/manage.py createsuperuser
 
 setup:
 	pip install pipenv
