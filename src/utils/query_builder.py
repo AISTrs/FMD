@@ -96,7 +96,8 @@ MASTER_LEDGER_VIEW = """
             account, 
             budget, 
             purpose, 
-            semester as fiscal_term, 
+            semester as fiscal_term,
+            fiscal_id, 
             details 
         from 
             populate_purpose_cte 

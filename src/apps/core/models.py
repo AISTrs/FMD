@@ -90,6 +90,7 @@ class MasterLedger(DBView):
     budget = models.CharField(max_length=50)
     purpose = models.CharField(max_length=50)
     fiscal_term = models.CharField(max_length=50)
+    fiscal_id = models.CharField(max_length=50)
     details = models.TextField(default=" ")
 
     view_definition = MASTER_LEDGER_VIEW
