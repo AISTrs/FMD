@@ -1,5 +1,5 @@
 MASTER_LEDGER_VIEW = """
-        WITH cashledger_cte AS (
+        WITH cash_ledger_cte AS (
         SELECT 
             transaction_id, 
             date, 
@@ -11,9 +11,9 @@ MASTER_LEDGER_VIEW = """
             fiscal_id, 
             details 
         FROM 
-            apps_core_cashledger
+            cash_ledger
         ), 
-        bankledger_cte AS (
+        bank_ledger_cte AS (
         SELECT 
             transaction_id, 
             date, 
@@ -25,9 +25,9 @@ MASTER_LEDGER_VIEW = """
             fiscal_id, 
             details 
         FROM 
-            apps_core_bankledger
+            bank_ledger
         ), 
-        venmoledger_cte AS (
+        venmo_ledger_cte AS (
         SELECT 
             transaction_id, 
             date, 
@@ -39,23 +39,23 @@ MASTER_LEDGER_VIEW = """
             fiscal_id, 
             note AS details 
         FROM 
-            apps_core_venmoledger
+            venmo_ledger
         ), 
         combined_ledger_cte as (
         SELECT 
             * 
         FROM 
-            cashledger_cte 
+            cash_ledger_cte 
         UNION 
         SELECT 
             * 
         FROM 
-            bankledger_cte 
+            bank_ledger_cte 
         UNION 
         SELECT 
             * 
         FROM 
-            venmoledger_cte
+            venmo_ledger_cte
         ), 
         populate_budget_cte as (
         Select 
@@ -70,7 +70,7 @@ MASTER_LEDGER_VIEW = """
             details 
         from 
             combined_ledger_cte 
-            left join apps_core_transactioncategory on budget_id = id
+            left join transaction_category on budget_id = id
         ), 
         populate_purpose_cte as (
         Select 
@@ -85,7 +85,7 @@ MASTER_LEDGER_VIEW = """
             details 
         from 
             populate_budget_cte 
-            left join apps_core_transactioncategory on purpose_id = id
+            left join transaction_category on purpose_id = id
         ), 
         populate_fiscal_term_cte as (
         Select 
@@ -101,12 +101,11 @@ MASTER_LEDGER_VIEW = """
             details 
         from 
             populate_purpose_cte 
-            left join apps_core_fiscalterm on fiscal_id = id
+            left join fiscal_term on fiscal_id = id
         ) 
         select 
         row_number() over () as id, 
         * 
         from 
         populate_fiscal_term_cte
-
     """

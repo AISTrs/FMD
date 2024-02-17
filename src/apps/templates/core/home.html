@@ -1,9 +1,41 @@
 {% extends "base_layout.html" %}
 
+{% block js %}
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="/static/assets/js/home.js"></script>
+
+{% endblock js%}
+
 {% block content%}
-<h1>
-    This is my extra content
-</h1>
+
+<div id="home-layout">
+
+    <div id="top-nav-semester">
+
+        <nav id="fiscal_term">
+            <div class="dropdown open p-5">
+                <button
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        class="btn btn-primary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        id="triggerId"
+                        type="button"
+                >
+                    Dropdown Colored
+                </button>
+                <div aria-labelledby="triggerId" class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item disabled" href="#">Disabled action</a>
+                </div>
+            </div>
+
+        </nav>
+
+    </div>
+
+</div>
 
 
 {% endblock content%}

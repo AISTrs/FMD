@@ -11,7 +11,7 @@ class FiscalTermAdmin(admin.ModelAdmin):
 class TransactionCategoryAdmin(admin.ModelAdmin):
     list_display = ("category", "value")
     list_filter = ("category",)
-    search_fields = ("category",)
+    search_fields = ("category", "value")
 
 
 class BudgetAdmin(admin.ModelAdmin):
@@ -22,7 +22,7 @@ class BudgetAdmin(admin.ModelAdmin):
         "budget",
     )
     list_filter = ("category_id__category", "fiscal__semester")
-    search_fields = ("category_id__category", "fiscal__semester")
+    search_fields = ("category_id__category", "fiscal__semester", "category_id__value")
     raw_id_fields = ("category_id", "fiscal")
 
     def category_id_value(self, obj):
@@ -53,6 +53,7 @@ class CashLedgerAdmin(admin.ModelAdmin):
         "account",
         "transaction_id",
         "fiscal",
+        "batch_id",
     )
     search_fields = (
         "date",
@@ -61,9 +62,11 @@ class CashLedgerAdmin(admin.ModelAdmin):
         "transaction_type",
         "notes",
         "account",
+        "budget_id__value",
+        "purpose_id__value",
         "fiscal__semester",
     )
-    list_filter = ("date", "transaction_type", "account", "fiscal__semester")
+    list_filter = ("date", "transaction_type", "account", "fiscal__semester", "batch_id",)
 
     raw_id_fields = ("budget", "purpose", "fiscal")
 
@@ -91,19 +94,20 @@ class BankLedgerAdmin(admin.ModelAdmin):
         "notes",
         "transaction_id",
         "fiscal",
+        "batch_id",
     )
     search_fields = (
         "date",
         "amount",
         "details",
         "transaction_type",
-        "opening_balance",
-        "closing_balance",
         "notes",
         "transaction_id",
+        "budget_id__value",
+        "purpose_id__value",
         "fiscal__semester",
     )
-    list_filter = ("date", "transaction_type", "fiscal__semester")
+    list_filter = ("date", "transaction_type", "fiscal__semester", "batch_id",)
 
     raw_id_fields = ("budget", "purpose", "fiscal")
 
@@ -142,6 +146,7 @@ class VenmoLedgerAdmin(admin.ModelAdmin):
         "transaction_type",
         "transaction_id",
         "fiscal",
+        "batch_id",
     )
     search_fields = (
         "date",
@@ -157,16 +162,16 @@ class VenmoLedgerAdmin(admin.ModelAdmin):
         "net_amount",
         "tax_rate",
         "tax_exempt",
-        "budget",
         "funding_source",
         "funding_destination",
-        "purpose",
+        "budget_id__value",
+        "purpose_id__value",
         "opening_balance",
         "closing_balance",
         "transaction_type",
         "fiscal__semester",
     )
-    list_filter = ("date", "type", "status", "transaction_type", "fiscal__semester")
+    list_filter = ("date", "type", "status", "transaction_type", "fiscal__semester", "batch_id",)
     raw_id_fields = ("budget", "purpose", "fiscal")
 
     def get_budget(self, obj):
