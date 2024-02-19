@@ -109,3 +109,26 @@ MASTER_LEDGER_VIEW = """
         from 
         populate_fiscal_term_cte
     """
+
+COMMITTEE_EXPENSE_DATA_QUERY = """
+        with master_ledger_cte as (
+        Select * from master_ledger where fiscal_id = {fiscal_id}
+        ),
+        budget_cte as (
+        select value, budget
+        from budget left join transaction_category on budget.category_id = transaction_category.id
+        where fiscal_id = {fiscal_id}
+        ),
+        master_ledger_agg as (
+        select budget as committee,
+        round(SUM(CASE WHEN transaction_type = 'credit' THEN amount ELSE 0 END)::numeric,2) AS income,
+        round(SUM(CASE WHEN transaction_type = 'debit' THEN amount ELSE 0 END)::numeric,2) AS expense
+        from master_ledger_cte
+        group by budget
+        ),
+        master_ledger_join_budget as (
+        select committee, budget, income, expense
+        from master_ledger_agg m left join budget_cte b on m.committee = b.value
+        )
+        select *, round((budget + income - expense)::numeric,2) as net, round(((abs(income - expense)/budget)*100)::numeric,2) as usage from master_ledger_join_budget;
+        """

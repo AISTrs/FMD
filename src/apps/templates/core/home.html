@@ -1,5 +1,11 @@
 {% extends "base_layout.html" %}
 
+{% block stylesheet %}
+
+<link href="/static/assets/css/home.css" rel="stylesheet">
+
+{% endblock stylesheet %}
+
 {% block js %}
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -9,31 +15,27 @@
 
 {% block content%}
 
-<div id="home-layout">
+<div class="home-layout" id="home-layout">
 
-    <div id="top-nav-semester">
+    <div class="top-nav-semester shadow m-4">
+        <select class="fiscal-term-drop-down m-3" id="fiscal-term-drop-down">
+        </select>
 
-        <nav id="fiscal_term">
-            <div class="dropdown open p-5">
-                <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        class="btn btn-primary dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        id="triggerId"
-                        type="button"
-                >
-                    Dropdown Colored
-                </button>
-                <div aria-labelledby="triggerId" class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item disabled" href="#">Disabled action</a>
-                </div>
-            </div>
-
-        </nav>
+        <span class="date-label" id="start-date-label">Start Date: </span>
+        <span class="date-label p-lg-4" id="end-date-label">End Date: </span>
 
     </div>
+
+
+    <div class="committee-table-data bg-white shadow m-4 div-committee-table">
+        <img class="ais-logo p-2" src="/static/assets/images/AIS.png">
+
+        <div class="container">
+            <div id="tableContainer"></div>
+        </div>
+
+    </div>
+
 
 </div>
 

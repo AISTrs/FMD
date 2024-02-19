@@ -1,9 +1,10 @@
+from django.db import connection
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from apps.core.models import FiscalTerm, Budget, MasterLedger
 from apps.core.serializer import FiscalTermSerializer
 from django.db.models import Sum
-
+from utils.query_builder import COMMITTEE_EXPENSE_DATA_QUERY
 
 @api_view(["GET"])
 def get_fiscal_data(request, fiscal_id=None):
@@ -62,3 +63,17 @@ def get_expense_data(request, fiscal_id=None):
         ] = expense["amount"]
 
     return JsonResponse(expense_data, safe=False)
+
+
+@api_view(["GET"])
+def get_committee_expense_data(request, fiscal_id):
+    query = COMMITTEE_EXPENSE_DATA_QUERY.replace("{fiscal_id}", str(fiscal_id))
+    with connection.cursor() as cursor:
+        cursor.execute(query, [fiscal_id])
+        columns = [col[0] for col in cursor.description]
+        results = [
+            dict(zip(columns, row))
+            for row in cursor.fetchall()
+        ]
+
+    return JsonResponse(results, safe=False)

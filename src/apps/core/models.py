@@ -31,7 +31,7 @@ class TransactionCategory(models.Model):
 
 class Budget(models.Model):
     fiscal = models.ForeignKey(FiscalTerm, on_delete=models.CASCADE)
-    category_id = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE)
     budget = models.FloatField(default=0.0)
 
     class Meta:

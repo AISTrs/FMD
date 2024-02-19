@@ -23,15 +23,15 @@ class BudgetAdmin(admin.ModelAdmin):
     )
     list_filter = ("category_id__category", "fiscal__semester")
     search_fields = ("category_id__category", "fiscal__semester", "category_id__value")
-    raw_id_fields = ("category_id", "fiscal")
+    raw_id_fields = ("category", "fiscal")
 
     def category_id_value(self, obj):
-        return obj.category_id.value
+        return obj.category.value
 
     category_id_value.short_description = "Value"
 
     def category_id_category(self, obj):
-        return obj.category_id.category
+        return obj.category.category
 
     category_id_category.short_description = "Category"
 
