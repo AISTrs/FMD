@@ -1,5 +1,5 @@
 .base-nav-layout {
-    background-color: #5e92f3;
+    background-color: #4a7cc7;
     position: fixed;
     top: 0;
     left: 0;
@@ -47,3 +47,7 @@
     background-color: #6ca6ff; 
     border-radius: 10px;
 }   
+
+.f-basic-black {
+    color: #424662;
+}

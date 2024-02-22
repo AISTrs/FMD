@@ -124,7 +124,7 @@ function populateTable() {
     const header = ["Committee", "Budget", "Income", "Expenses", "Net", "Usage"]
     header.forEach(key => {
         var headerCell = document.createElement('th');
-        headerCell.classList.add('p-6', 'text-primary', 'p-lg-1');
+        headerCell.classList.add('p-6', 'p-lg-1');
         headerCell.textContent = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize first letter
         headerRow.appendChild(headerCell);
     });
