@@ -1,20 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.level0-layout {
+    display: flex;
+    overflow: auto;
+    overflow-x: auto;
+    border-radius: 5px;
+    width: 90vw;
+    justify-content: space-between;
+}
+
+.level1-layout {
+    display: flex;
+    overflow: auto;
+    overflow-x: auto;
+    width: 93vw;
+    justify-content: space-between;
+}
+
 .top-nav-semester {
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
     border-radius: 5px;
     width: 90vw;
 }
 
+.committee-scatter-plot {
+    flex: 1;
+    border-radius: 5px;
+    align-items: center;
+}
+
+
 .div-committee-table {
     background-color: white;
-    display: flex;
+    flex: 1;
     align-items: center;
+    justify-content: center;
     margin: 10px;
     border-radius: 5px;
-    width: 90vw;
+    font-family: 'Poppins', sans-serif;
 }
 
 .date-label {
@@ -22,8 +48,21 @@
     font-size: large;
 }
 
+.committee-table-container {
+    max-height: 400px;
+    width: 100%;
+    overflow: auto;
+    overflow-x: auto;
+}
+
+.committee-table-row {
+    font-size: 10px;
+}
+
 .committee-table-header {
     background-color: #e0e0e0;
+    font-size: 12px;
+    justify-content: left;
 }
 
 .committee-table-row:hover {
@@ -37,6 +76,8 @@
     left: 90px;
     transition: 0.5s;
     width: 100%;
+    overflow: auto;
+    overflow-x: auto;
 }
 
 .fiscal-term-drop-down {
@@ -56,6 +97,6 @@
 }
 
 .ais-logo {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
