@@ -1,0 +1,10 @@
+.consulting-layout {
+    margin: -10px;
+    margin-left: -20px;
+    overflow: auto;
+    overflow-x: auto;
+}
+
+.div-trend-charts {
+    display: flex;
+}

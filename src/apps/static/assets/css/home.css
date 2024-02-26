@@ -17,21 +17,11 @@
     justify-content: space-between;
 }
 
-.top-nav-semester {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 5px;
-    width: 90vw;
-}
-
 .committee-scatter-plot {
     flex: 1;
     border-radius: 5px;
     align-items: center;
 }
-
 
 .div-committee-table {
     background-color: white;
@@ -72,35 +62,11 @@
 }
 
 .home-layout {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 90px;
-    transition: 0.5s;
-    width: 100%;
+    margin: -10px;
+    margin-left: -20px;
     overflow: auto;
     overflow-x: auto;
 }
 
-.fiscal-term-drop-down {
-    border: 2px solid #7686bc;
-    border-radius: 5px;
-    padding: 10px 10px;
-    font-size: 16px;
-    color: #333;
-    margin-right: auto;
-}
 
-.fiscal-term-drop-down:hover {
-    background-color: #e0e0e0;
-}
-
-.fiscal-term-drop-down:focus {
-    border-color: #007bff;
-}
-
-.ais-logo {
-    width: 100px;
-    height: auto;
-}
 

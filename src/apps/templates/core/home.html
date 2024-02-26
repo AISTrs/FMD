@@ -3,6 +3,7 @@
 {% block stylesheet %}
 
 <link href="/static/assets/css/home.css" rel="stylesheet">
+<link href="/static/assets/css/components/semester_nav_bar.css" rel="stylesheet">
 
 {% endblock stylesheet %}
 
@@ -10,6 +11,7 @@
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="/static/assets/js/home.js"></script>
+<script src="/static/assets/js/components/semester_nav_bar.js"></script>
 
 {% endblock js%}
 
@@ -17,19 +19,7 @@
 
 <div class="home-layout" id="home-layout">
 
-    <div class="top-nav-semester shadow m-4 f-basic-black">
-        <div>
-            <img class="ais-logo p-2" src="/static/assets/images/AIS.png">
-
-            <select class="fiscal-term-drop-down m-3" id="fiscal-term-drop-down">
-            </select>
-        </div>
-        
-
-        <span class="date-label" id="start-date-label">Start Date: </span>
-        <span class="date-label p-lg-4" id="end-date-label">End Date: </span>
-
-    </div>
+    {% include "components/semester_nav_bar.html" %}
 
     <!-- <div class="level0-layout bg-white shadow m-4 p-2">
         <img class="ais-logo p-2" src="/static/assets/images/AIS.png">
