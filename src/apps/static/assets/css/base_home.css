@@ -18,13 +18,13 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 90px; 
-    right: 0; 
+    left: 90px;
+    right: 0;
     padding-left: 15px;
     transition: 0.5s;
 }
 
-.base-nav-layout:hover{
+.base-nav-layout:hover {
     width: 200px;
 }
 
@@ -47,9 +47,9 @@
 }
 
 .nav-link:hover {
-    background-color: #6ca6ff; 
+    background-color: #6ca6ff;
     border-radius: 10px;
-}   
+}
 
 
 .nav-committee-dropdown {

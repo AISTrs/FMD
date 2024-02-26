@@ -9,12 +9,11 @@ from django.shortcuts import render, redirect
 
 def login(request):
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST["username"]
+        password = request.POST["password"]
 
         if User.objects.filter(username=username).exists():
-            user = authenticate(request, username=username,
-                                password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth_login(request, user)
                 return redirect("/")
@@ -27,15 +26,17 @@ def login(request):
 
 def signup(request):
     if request.method == "POST":
-        username = request.POST['username']
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+        username = request.POST["username"]
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
+        email = request.POST["email"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
 
         if User.objects.filter(username=username):
-            messages.error(request, "Username already exists! Please try another username")
+            messages.error(
+                request, "Username already exists! Please try another username"
+            )
             return redirect("/signup/")
 
         if password1 != password2:
@@ -46,12 +47,16 @@ def signup(request):
             messages.error(request, "Email already registered!")
             return redirect("/signup/")
 
-        user = User.objects.create_user(username=username, email=email, password=password1)
+        user = User.objects.create_user(
+            username=username, email=email, password=password1
+        )
         user.first_name = firstname
         user.last_name = lastname
         user.save()
 
-        messages.success(request, "Account created successfully! Please login using your credentials")
+        messages.success(
+            request, "Account created successfully! Please login using your credentials"
+        )
         return redirect("/login/")
 
     return render(request, "signup.html")

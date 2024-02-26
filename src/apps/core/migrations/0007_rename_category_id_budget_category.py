@@ -5,13 +5,13 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('apps_core', '0006_auto_20240216_1557'),
+        ("apps_core", "0006_auto_20240216_1557"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='budget',
-            old_name='category_id',
-            new_name='category',
+            model_name="budget",
+            old_name="category_id",
+            new_name="category",
         ),
     ]

@@ -6,6 +6,7 @@ from apps.core.serializer import FiscalTermSerializer
 from django.db.models import Sum
 from utils.query_builder import COMMITTEE_EXPENSE_DATA_QUERY
 
+
 @api_view(["GET"])
 def get_fiscal_data(request, fiscal_id=None):
     queryset = FiscalTerm.objects
@@ -71,9 +72,6 @@ def get_committee_expense_data(request, fiscal_id):
     with connection.cursor() as cursor:
         cursor.execute(query, [fiscal_id])
         columns = [col[0] for col in cursor.description]
-        results = [
-            dict(zip(columns, row))
-            for row in cursor.fetchall()
-        ]
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
 
     return JsonResponse(results, safe=False)

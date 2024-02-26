@@ -5,32 +5,32 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('apps_core', '0004_bankledger_batch_id_cashledger_batch_id_and_more'),
+        ("apps_core", "0004_bankledger_batch_id_cashledger_batch_id_and_more"),
     ]
 
     operations = [
         migrations.AlterModelTable(
-            name='bankledger',
-            table='bank_ledger',
+            name="bankledger",
+            table="bank_ledger",
         ),
         migrations.AlterModelTable(
-            name='budget',
-            table='budget',
+            name="budget",
+            table="budget",
         ),
         migrations.AlterModelTable(
-            name='cashledger',
-            table='cash_ledger',
+            name="cashledger",
+            table="cash_ledger",
         ),
         migrations.AlterModelTable(
-            name='fiscalterm',
-            table='fiscal_term',
+            name="fiscalterm",
+            table="fiscal_term",
         ),
         migrations.AlterModelTable(
-            name='transactioncategory',
-            table='transaction_category',
+            name="transactioncategory",
+            table="transaction_category",
         ),
         migrations.AlterModelTable(
-            name='venmoledger',
-            table='venmo_ledger',
+            name="venmoledger",
+            table="venmo_ledger",
         ),
     ]

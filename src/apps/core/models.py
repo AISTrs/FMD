@@ -7,8 +7,8 @@ import uuid
 
 
 class TransactionType(models.TextChoices):
-    CREDIT = 'credit'
-    DEBIT = 'debit'
+    CREDIT = "credit"
+    DEBIT = "debit"
 
 
 class FiscalTerm(models.Model):
@@ -18,7 +18,7 @@ class FiscalTerm(models.Model):
     notes = models.TextField(default="Blank")
 
     class Meta:
-        db_table = 'fiscal_term'
+        db_table = "fiscal_term"
 
 
 class TransactionCategory(models.Model):
@@ -26,7 +26,7 @@ class TransactionCategory(models.Model):
     value = models.CharField(default=" ")
 
     class Meta:
-        db_table = 'transaction_category'
+        db_table = "transaction_category"
 
 
 class Budget(models.Model):
@@ -35,41 +35,62 @@ class Budget(models.Model):
     budget = models.FloatField(default=0.0)
 
     class Meta:
-        db_table = 'budget'
+        db_table = "budget"
+
 
 class CashLedger(models.Model):
     batch_id = models.BigIntegerField(default=1)
     fiscal = models.ForeignKey(FiscalTerm, on_delete=models.CASCADE)
-    budget = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='cash_budget_transactions')
-    purpose = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='cash_purpose_transactions')
+    budget = models.ForeignKey(
+        TransactionCategory,
+        on_delete=models.CASCADE,
+        related_name="cash_budget_transactions",
+    )
+    purpose = models.ForeignKey(
+        TransactionCategory,
+        on_delete=models.CASCADE,
+        related_name="cash_purpose_transactions",
+    )
     transaction_id = models.UUIDField(default=uuid.uuid4)
     date = models.DateField(default=datetime.datetime.now)
     amount = models.FloatField(default=0.0)
     details = models.TextField(default="Blank")
-    transaction_type = models.CharField(max_length=6, choices=TransactionType.choices, default=TransactionType.CREDIT)
+    transaction_type = models.CharField(
+        max_length=6, choices=TransactionType.choices, default=TransactionType.CREDIT
+    )
     account = models.CharField(max_length=50)
     notes = models.TextField(default="Blank")
 
     class Meta:
-        db_table = 'cash_ledger'
+        db_table = "cash_ledger"
 
 
 class BankLedger(models.Model):
     batch_id = models.BigIntegerField(default=1)
     fiscal = models.ForeignKey(FiscalTerm, on_delete=models.CASCADE)
-    budget = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='bank_budget_transactions')
-    purpose = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='bank_purpose_transactions')
+    budget = models.ForeignKey(
+        TransactionCategory,
+        on_delete=models.CASCADE,
+        related_name="bank_budget_transactions",
+    )
+    purpose = models.ForeignKey(
+        TransactionCategory,
+        on_delete=models.CASCADE,
+        related_name="bank_purpose_transactions",
+    )
     transaction_id = models.UUIDField(default=uuid.uuid4)
     date = models.DateField(default=datetime.datetime.now)
     amount = models.FloatField(default=0.0)
     details = models.TextField(default="Blank")
-    transaction_type = models.CharField(max_length=6, choices=TransactionType.choices, default=TransactionType.CREDIT)
+    transaction_type = models.CharField(
+        max_length=6, choices=TransactionType.choices, default=TransactionType.CREDIT
+    )
     opening_balance = models.FloatField(default=0.0)
     closing_balance = models.FloatField(default=0.0)
     notes = models.TextField(default="Blank")
 
     class Meta:
-        db_table = 'bank_ledger'
+        db_table = "bank_ledger"
 
 
 class VenmoLedger(models.Model):
@@ -88,17 +109,27 @@ class VenmoLedger(models.Model):
     net_amount = models.FloatField(default=0.0)
     tax_rate = models.FloatField(default=0.0)
     tax_exempt = models.BooleanField(default=False)
-    budget = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='budget_venmo_ledgers')
+    budget = models.ForeignKey(
+        TransactionCategory,
+        on_delete=models.CASCADE,
+        related_name="budget_venmo_ledgers",
+    )
     funding_source = models.CharField(max_length=50, default="Blank")
     funding_destination = models.CharField(max_length=50, default="Blank")
-    purpose = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='purpose_venmo_ledgers')
+    purpose = models.ForeignKey(
+        TransactionCategory,
+        on_delete=models.CASCADE,
+        related_name="purpose_venmo_ledgers",
+    )
     opening_balance = models.FloatField(default=0.0)
     closing_balance = models.FloatField(default=0.0)
-    transaction_type = models.CharField(max_length=6, choices=TransactionType.choices, default=TransactionType.CREDIT)
+    transaction_type = models.CharField(
+        max_length=6, choices=TransactionType.choices, default=TransactionType.CREDIT
+    )
     fiscal = models.ForeignKey(FiscalTerm, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'venmo_ledger'
+        db_table = "venmo_ledger"
 
 
 class MasterLedger(DBView):
@@ -117,4 +148,4 @@ class MasterLedger(DBView):
 
     class Meta:
         managed = False  # Managed must be set to False!
-        db_table = 'master_ledger'
+        db_table = "master_ledger"

@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 @login_required(login_url="/login/")
 def home(request):
-    return render(request, 'home.html')
+    return render(request, "home.html")
 
 
 @login_required(login_url="/login/")

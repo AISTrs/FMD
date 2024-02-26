@@ -5,23 +5,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('apps_core', '0003_auto_20240215_0207'),
+        ("apps_core", "0003_auto_20240215_0207"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='bankledger',
-            name='batch_id',
+            model_name="bankledger",
+            name="batch_id",
             field=models.BigIntegerField(default=1),
         ),
         migrations.AddField(
-            model_name='cashledger',
-            name='batch_id',
+            model_name="cashledger",
+            name="batch_id",
             field=models.BigIntegerField(default=1),
         ),
         migrations.AddField(
-            model_name='venmoledger',
-            name='batch_id',
+            model_name="venmoledger",
+            name="batch_id",
             field=models.BigIntegerField(default=1),
         ),
     ]

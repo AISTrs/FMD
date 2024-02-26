@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     nav.addEventListener('mouseenter', function () {
         // Loop through each element and change its opacity
-        
+
         navTextElements.forEach(function (element) {
             element.style.opacity = '1'; // Set opacity to 1
         });
 
-        contentDiv.style.left='200px';
+        contentDiv.style.left = '200px';
     });
 
     nav.addEventListener('mouseleave', function () {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             element.style.opacity = '0'; // Set opacity to 0
         });
 
-        contentDiv.style.left='90px';
+        contentDiv.style.left = '90px';
 
         var arrowIcon = document.getElementById('collapse-arrow-icon');
 

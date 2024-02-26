@@ -66,7 +66,13 @@ class CashLedgerAdmin(admin.ModelAdmin):
         "purpose_id__value",
         "fiscal__semester",
     )
-    list_filter = ("date", "transaction_type", "account", "fiscal__semester", "batch_id",)
+    list_filter = (
+        "date",
+        "transaction_type",
+        "account",
+        "fiscal__semester",
+        "batch_id",
+    )
 
     raw_id_fields = ("budget", "purpose", "fiscal")
 
@@ -107,7 +113,12 @@ class BankLedgerAdmin(admin.ModelAdmin):
         "purpose_id__value",
         "fiscal__semester",
     )
-    list_filter = ("date", "transaction_type", "fiscal__semester", "batch_id",)
+    list_filter = (
+        "date",
+        "transaction_type",
+        "fiscal__semester",
+        "batch_id",
+    )
 
     raw_id_fields = ("budget", "purpose", "fiscal")
 
@@ -171,7 +182,14 @@ class VenmoLedgerAdmin(admin.ModelAdmin):
         "transaction_type",
         "fiscal__semester",
     )
-    list_filter = ("date", "type", "status", "transaction_type", "fiscal__semester", "batch_id",)
+    list_filter = (
+        "date",
+        "type",
+        "status",
+        "transaction_type",
+        "fiscal__semester",
+        "batch_id",
+    )
     raw_id_fields = ("budget", "purpose", "fiscal")
 
     def get_budget(self, obj):
@@ -187,9 +205,24 @@ class VenmoLedgerAdmin(admin.ModelAdmin):
 
 class MasterLedgerAdmin(admin.ModelAdmin):
     list_display = (
-    'transaction_id', 'date', 'amount', 'transaction_type', 'account', 'budget', 'purpose', 'fiscal_term')
-    list_filter = ('transaction_type', 'account', 'budget', 'purpose', 'fiscal_term')
-    search_fields = ('transaction_id', 'account', 'budget', 'purpose', 'fiscal_term', 'details')
+        "transaction_id",
+        "date",
+        "amount",
+        "transaction_type",
+        "account",
+        "budget",
+        "purpose",
+        "fiscal_term",
+    )
+    list_filter = ("transaction_type", "account", "budget", "purpose", "fiscal_term")
+    search_fields = (
+        "transaction_id",
+        "account",
+        "budget",
+        "purpose",
+        "fiscal_term",
+        "details",
+    )
 
     def has_delete_permission(self, request, obj=None):
         return False
