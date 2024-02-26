@@ -8,6 +8,9 @@
     transition: 0.5s;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    overflow: auto;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .container-fluid {
@@ -47,6 +50,21 @@
     background-color: #6ca6ff; 
     border-radius: 10px;
 }   
+
+
+.nav-committee-dropdown {
+    background-color: #FFFF;
+
+}
+
+.nav-committee-dropdown li {
+    background-color: #424662;
+    color: white;
+}
+
+.nav-committee-dropdown li:hover {
+    background-color: #6ca6ff;
+}
 
 .f-basic-black {
     color: #424662;
