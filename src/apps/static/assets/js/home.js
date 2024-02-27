@@ -20,17 +20,17 @@ function BarPlot() {
         var customLabels = committees.map((committee, index) => `Committee: ${committee}<br>Usage: ${usage[index].toFixed(2)}%`);
 
         barChart({
-            "label" : committees,
-            "value" : usage
+            "label": committees,
+            "value": usage
         }, customLabels, "Committee vs Usage", 'Committee', 'Usage %', 'committee-bar-plot', {},
-        {
-            height: 390,
-            margin: {
-                r: 20,
-                l: 60,
-                t: 50
-            }
-        });
+            {
+                height: 390,
+                margin: {
+                    r: 20,
+                    l: 60,
+                    t: 50
+                }
+            });
     });
 
 }

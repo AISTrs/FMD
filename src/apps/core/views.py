@@ -7,5 +7,6 @@ from django.shortcuts import render
 def home(request):
     return render(request, "home.html")
 
+
 def consulting(request):
     return render(request, "committee/consulting.html")

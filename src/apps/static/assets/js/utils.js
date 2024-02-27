@@ -10,7 +10,7 @@ function aggregateTimeseriesData(data, interval) {
     var intervalTotal = 0;
     var sumTotal = 0;
 
-    for(let i = 0; i < dates.length; i++) {
+    for (let i = 0; i < dates.length; i++) {
         if (interval === 'day' && currentIntervalDate !== dates[i]) {
             aggregatedDates.push(formatDate(currentIntervalDate, interval));
             aggregatedValues.push(intervalTotal);
@@ -41,9 +41,9 @@ function aggregateTimeseriesData(data, interval) {
     aggregatedSums.push(sumTotal);
 
     return {
-        "date" : aggregatedDates,
-        "value" : aggregatedValues,
-        "aggregateValue" : aggregatedSums,
+        "date": aggregatedDates,
+        "value": aggregatedValues,
+        "aggregateValue": aggregatedSums,
     }
 }
 
@@ -74,6 +74,6 @@ function formatDate(date, format) {
     } else if (format === 'month') {
         return `${year}-${month}`;
     } else {
-        return date; 
+        return date;
     }
 }

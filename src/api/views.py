@@ -77,9 +77,11 @@ def get_committee_expense_data(request, fiscal_id):
     return JsonResponse(results, safe=False)
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def get_committee_transactions_data(request, committee, fiscal_id):
-    queryset = MasterLedger.objects.filter(fiscal_id=fiscal_id, budget__iexact=committee).order_by("date")
+    queryset = MasterLedger.objects.filter(
+        fiscal_id=fiscal_id, budget__iexact=committee
+    ).order_by("date")
     serializer = MasterLedgerSerializer(queryset, many=True)
 
     return JsonResponse(serializer.data, safe=False)
