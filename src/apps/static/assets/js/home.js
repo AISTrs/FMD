@@ -3,13 +3,13 @@ var committeeExpenseData;
 function semesterNavBarCallback(data, selectedIndex) {
     var tableLabel = document.getElementById('committee-table-label');
 
-    committeeExpenseData = fetchApiJsonData(`/api/committee_expense_data/${data[selectedIndex].id}/`)
+    committeeExpenseData = fetchApiJsonData(`/api/committee_expense_data/${data[selectedIndex].id}/`);
     tableLabel.innerText = `${data[selectedIndex].semester} expenses budget`;
     populateTable();
-    populateScatterPlot();
+    BarPlot();
 }
 
-function populateScatterPlot() {
+function BarPlot() {
 
     committeeExpenseData.then(data => {
 
@@ -17,35 +17,21 @@ function populateScatterPlot() {
 
         var committees = filteredData.map(item => item.committee);
         var usage = filteredData.map(item => parseFloat(item.usage));
+        var customLabels = committees.map((committee, index) => `Committee: ${committee}<br>Usage: ${usage[index].toFixed(2)}%`);
 
-        var trace = {
-            x: committees,
-            y: usage,
-            mode: 'markers',
-            type: 'bar',
-            marker: {
-                size: 8,
-                color: 'green'
+        barChart({
+            "label" : committees,
+            "value" : usage
+        }, customLabels, "Committee vs Usage", 'Committee', 'Usage %', 'committee-bar-plot', {},
+        {
+            height: 390,
+            margin: {
+                r: 20,
+                l: 60,
+                t: 50
             }
-        };
-
-        var layout = {
-            title: 'Committee vs Usage',
-            xaxis: { title: 'Committee' },
-            yaxis: { title: 'Usage %' },
-            hoverlabel: {
-                bgcolor: 'orange',
-                font: { color: 'white' }
-            },
-            hovermode: 'closest',
-            hoverinfo: 'text'
-        };
-
-        Plotly.newPlot('committee-scatter-plot', [trace], layout);
-
-
+        });
     });
-
 
 }
 

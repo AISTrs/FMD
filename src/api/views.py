@@ -2,7 +2,7 @@ from django.db import connection
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from apps.core.models import FiscalTerm, Budget, MasterLedger
-from apps.core.serializer import FiscalTermSerializer
+from apps.core.serializer import FiscalTermSerializer, MasterLedgerSerializer
 from django.db.models import Sum
 from utils.query_builder import COMMITTEE_EXPENSE_DATA_QUERY
 
@@ -75,3 +75,11 @@ def get_committee_expense_data(request, fiscal_id):
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
 
     return JsonResponse(results, safe=False)
+
+
+@api_view(['GET'])
+def get_committee_transactions_data(request, committee, fiscal_id):
+    queryset = MasterLedger.objects.filter(fiscal_id=fiscal_id, budget__iexact=committee).order_by("date")
+    serializer = MasterLedgerSerializer(queryset, many=True)
+
+    return JsonResponse(serializer.data, safe=False)

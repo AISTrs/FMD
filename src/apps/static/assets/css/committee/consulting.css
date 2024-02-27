@@ -3,8 +3,19 @@
     margin-left: -20px;
     overflow: auto;
     overflow-x: auto;
+    width: 93vw;
 }
 
 .div-trend-charts {
     display: flex;
+    width: 93vw;
+    margin-top: -30px;
+}
+
+.trend-chart {
+    margin: 22px;
+    border-radius: 5px;
+    height: 400px;
+    width: 700px;
+    padding: 30px;
 }

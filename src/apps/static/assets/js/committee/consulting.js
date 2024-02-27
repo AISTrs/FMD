@@ -1,16 +1,53 @@
-document.addEventListener("DOMContentLoaded", function () {
 
-    const rawData = [
-        { date: '2022-01-01', value: 10 },
-        { date: '2022-01-02', value: 15 },
-        { date: '2022-01-03', value: 13 },
-        { date: '2022-01-04', value: 17 },
-        { date: '2022-01-05', value: 10 }
-    ];
+var committeeTransactionData;
 
-    // Create initial chart with daily data
-    const initialData = aggregateData(rawData, 'day');
-    const layout = { title: 'Time Series Chart with Grouping' };
-    Plotly.newPlot('time-series-chart', initialData, layout);
+function semesterNavBarCallback(data, selectedIndex) {
+    committeeTransactionData = fetchApiJsonData(`/api/consulting/${data[selectedIndex].id}`);
+    committeeTransactionData.then(data => {
 
-});
+        // Extracting dates and amounts
+        const dates = data.map(item => item.date);
+        const amounts = data.map(item => item.amount);
+
+        const interval = 'month';
+
+        var chartData = aggregateTimeseriesData({ "date": dates, "value": amounts }, interval);
+
+        var customLabels = chartData.date.map((date, index) => `Date: ${date}<br>Amount: $${chartData.aggregateValue[index].toFixed(2)}`);
+
+        timeseriesChart({
+            "label": chartData.date,
+            "value": chartData.aggregateValue
+        }, customLabels, "Timeseries chart of Consulting", interval, 'Amount ($)', 'time-series-chart', {},
+            {
+
+                height: 390,
+                margin: {
+                    r: 20,
+                    l: 60,
+                    t: 50,
+                    b: 50
+                }
+            });
+
+        customLabels = chartData.date.map((date, index) => `Date: ${date}<br>Amount: $${chartData.value[index].toFixed(2)}`);
+
+        barChart({
+            "label": chartData.date,
+            "value": chartData.value
+        }, customLabels, "Bar Chart of Consulting", interval, 'Amount ($)', 'bar-chart', {},
+            {
+
+                height: 390,
+                margin: {
+                    r: 20,
+                    l: 60,
+                    t: 50,
+                    b: 50
+                }
+            });
+
+    })
+}
+
+
