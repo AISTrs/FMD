@@ -1,45 +1,24 @@
-var committeeExpenseData;
+document.addEventListener("DOMContentLoaded", function () {
 
-function semesterNavBarCallback(data, selectedIndex) {
-    var tableLabel = document.getElementById('committee-table-label');
+    const tableLabel = document.getElementById('committee-table-label');
 
-    committeeExpenseData = fetchApiJsonData(`/api/committee_expense_data/${data[selectedIndex].id}/`);
-    tableLabel.innerText = `${data[selectedIndex].semester} expenses budget`;
-    populateTable();
-    BarPlot();
-}
+    initSemesterNavBar().then(fiscalData => {
+        const fiscalDropdown = document.getElementById("fiscal-term-drop-down");
 
-function BarPlot() {
+        tableLabel.innerText = `${fiscalData[fiscalDropdown.selectedIndex].semester} expenses budget`;
 
-    committeeExpenseData.then(data => {
-
-        var filteredData = data.filter(item => item.usage !== null);
-
-        var committees = filteredData.map(item => item.committee);
-        var usage = filteredData.map(item => parseFloat(item.usage));
-        var customLabels = committees.map((committee, index) => `Committee: ${committee}<br>Usage: ${usage[index].toFixed(2)}%`);
-
-        barChart({
-            "label": committees,
-            "value": usage
-        }, customLabels, "Committee vs Usage", 'Committee', 'Usage %', 'committee-bar-plot', {},
-            {
-                height: 390,
-                margin: {
-                    r: 20,
-                    l: 60,
-                    t: 50
-                }
-            });
+        fetchApiJsonData(`/api/committee_expense_data/${fiscalData[fiscalDropdown.selectedIndex].id}/`).then(data => {
+            populateTable(data);
+            plotBarChart(data);
+        });
     });
 
-}
-
+});
 
 // function to populate committee table 
-function populateTable() {
+function populateTable(data) {
 
-    var container = document.getElementById("tableContainer");
+    var container = document.getElementById("committee-table-container");
 
     container.innerHTML = "";
 
@@ -48,7 +27,6 @@ function populateTable() {
 
     var headerRow = document.createElement('tr');
     headerRow.classList.add('committee-table-header');
-
 
     const header = ["Committee", "Budget", "Income", "Expenses", "Net", "Usage"]
     header.forEach(key => {
@@ -59,22 +37,46 @@ function populateTable() {
     });
     table.appendChild(headerRow);
 
-    committeeExpenseData.then(data => {
-
-        data.forEach(function (item) {
-            var row = document.createElement('tr');
-            row.classList.add('committee-table-row');
-            for (var key in item) {
-                var cell = document.createElement('td');
-                cell.classList.add('p-2');
-                cell.textContent = item[key];
-                row.appendChild(cell);
-            }
-            table.appendChild(row);
-        });
-
+    data.forEach(function (item) {
+        var row = document.createElement('tr');
+        row.classList.add('committee-table-row');
+        for (var key in item) {
+            var cell = document.createElement('td');
+            cell.classList.add('p-2');
+            cell.textContent = item[key];
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
     });
 
     container.appendChild(table);
+}
 
+function plotBarChart(data) {
+
+    var filteredData = data.filter(item => item.usage !== null);
+
+    var committees = filteredData.map(item => item.committee);
+    var usage = filteredData.map(item => parseFloat(item.usage));
+
+    let ctx = document.getElementById("usage-bar-chart");
+
+    let parent = ctx.parentElement;
+
+    ctx.width = parent.clientWidth;
+    console.log(parent.clientWidth)
+    ctx.height = parent.clientHeight;
+
+    let chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: committees,
+            datasets: [
+                {
+                    label: "Usage %",
+                    data: usage
+                }
+            ]
+        }
+    });
 }

@@ -1,33 +1,29 @@
-var fiscalData = fetchApiJsonData("/api/fiscal_data/");
+async function initSemesterNavBar() {
+    const fiscalData = await fetchApiJsonData("/api/fiscal_data/").then(data => data);
+    populateSemesterNavBar(fiscalData);
+
+    return fiscalData
+}
 
 // function to populate semester nav Bar
-document.addEventListener('DOMContentLoaded', function () {
+function populateSemesterNavBar(data) {
 
-    var fiscalDropdown = document.getElementById("fiscal-term-drop-down");
+    const fiscalDropdown = document.getElementById("fiscal-term-drop-down");
 
-    var startDate = document.getElementById('start-date-label');
-    var endDate = document.getElementById('end-date-label');
+    const startDate = document.getElementById('start-date-label');
+    const endDate = document.getElementById('end-date-label');
 
-    fiscalData.then(data => {
-        fiscalData = data;
-        startDate.innerText = `Start Date: ${data[0].start_date}`;
-        endDate.innerText = `Start Date: ${data[0].end_date}`;
-        data.forEach(option => {
-            const newOption = document.createElement("option");
-            newOption.value = option.id;
-            newOption.text = option.semester;
-            fiscalDropdown.add(newOption);
-        });
-
-        semesterNavBarCallback(data, 0);
-    })
-
-    fiscalDropdown.addEventListener('change', function () {
-
-        startDate.innerText = `Start Date: ${fiscalData[fiscalDropdown.selectedIndex].start_date}`;
-        endDate.innerText = `Start Date: ${fiscalData[fiscalDropdown.selectedIndex].end_date}`;
-
-        semesterNavBarCallback(fiscalData, fiscalDropdown.selectedIndex);
+    startDate.innerText = `Start Date: ${data[0].start_date}`;
+    endDate.innerText = `End Date: ${data[0].end_date}`;
+    data.forEach(option => {
+        const newOption = document.createElement("option");
+        newOption.value = option.id;
+        newOption.text = option.semester;
+        fiscalDropdown.add(newOption);
     });
 
-});
+    fiscalDropdown.addEventListener('change', function () {
+        startDate.innerText = `Start Date: ${data[fiscalDropdown.selectedIndex].start_date}`;
+        endDate.innerText = `End Date: ${data[fiscalDropdown.selectedIndex].end_date}`;
+    });
+}

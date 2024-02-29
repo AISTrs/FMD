@@ -19,6 +19,7 @@
     left: 90px;
     right: 0;
     padding-left: 15px;
+    width: 92.7vw;
     transition: 0.5s;
     overflow: auto;
 }

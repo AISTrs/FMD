@@ -4,19 +4,17 @@
     display: flex;
     overflow: auto;
     border-radius: 5px;
-    width: 90vw;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .level1-layout {
     display: flex;
     overflow: auto;
-    width: 93vw;
-    margin-top: 85px;
+    margin-top: -30px;
     justify-content: space-between;
 }
 
-.committee-scatter-plot {
+.committee-bar-plot {
     flex: 1;
     border-radius: 5px;
     align-items: center;

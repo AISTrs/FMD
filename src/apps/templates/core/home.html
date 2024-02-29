@@ -8,9 +8,9 @@
 
 {% block js %}
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="/static/assets/js/home.js"></script>
-<script src="/static/assets/js/charts.js"></script>
+<script src="/static/assets/js/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
 {% endblock js%}
 
@@ -20,23 +20,21 @@
 
     {% include "components/semester_nav_bar.html" %}
 
-    <!-- <div class="level0-layout bg-white shadow m-4 p-2">
-        <img class="ais-logo p-2" src="/static/assets/images/AIS.png">
-    </div> -->
+    <div class="level0-layout bg-white shadow m-4 p-2">
+        <h2 class="f-basic-black" id="committee-table-label"></h2>
+    </div>
 
     <div class="level1-layout">
 
-        <div class="committee-table-data bg-white shadow m-4 p-2 div-committee-table">
-            <h2 id="committee-table-label" class="f-basic-black"></h2>
-            <div class="committee-table-container" id="tableContainer"></div>
+        <div class="bg-white shadow m-4 p-2 div-committee-table">
+            <div class="committee-table-container" id="committee-table-container"></div>
         </div>
 
-        <div class="committee-scatter-plot bg-white shadow m-4 p-2" id="div-committee-scatter-plot">
-            <div id="committee-bar-plot"></div>
+        <div class="committee-bar-plot bg-white shadow m-4 p-2">
+            <canvas id="usage-bar-chart"></canvas>
         </div>
 
     </div>
-
 
 </div>
 

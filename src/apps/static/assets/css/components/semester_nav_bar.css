@@ -1,13 +1,10 @@
 .top-nav-semester {
-    position: fixed;
-    top: 300;
-    z-index: 1000;
     background-color: white;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     border-radius: 5px;
-    width: 91vw;
+    margin-right: 300px;
     height: 70px;
 }
 
