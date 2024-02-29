@@ -3,7 +3,6 @@
 .level0-layout {
     display: flex;
     overflow: auto;
-    overflow-x: auto;
     border-radius: 5px;
     width: 90vw;
     justify-content: space-between;
@@ -12,8 +11,8 @@
 .level1-layout {
     display: flex;
     overflow: auto;
-    overflow-x: auto;
     width: 93vw;
+    margin-top: 85px;
     justify-content: space-between;
 }
 
@@ -42,7 +41,6 @@
     max-height: 400px;
     width: 100%;
     overflow: auto;
-    overflow-x: auto;
 }
 
 .committee-table-row {
@@ -65,5 +63,4 @@
     margin: -10px;
     margin-left: -20px;
     overflow: auto;
-    overflow-x: auto;
 }

@@ -1,4 +1,7 @@
 .top-nav-semester {
+    position: fixed;
+    top: 300;
+    z-index: 1000;
     background-color: white;
     display: flex;
     justify-content: space-between;
